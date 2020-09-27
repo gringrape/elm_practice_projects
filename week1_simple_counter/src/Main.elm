@@ -8,7 +8,7 @@ module Main exposing (..)
 
 
 import Browser
-import Html exposing (Html, button, div, text)
+import Html exposing (Html, button, div, text, p)
 import Html.Events exposing (onClick)
 
 
@@ -37,20 +37,13 @@ init =
 
 
 type Msg
-  = Increment
-  | Decrement
-
+  = Increment Int
 
 update : Msg -> Model -> Model
 update msg model =
   case msg of
-    Increment ->
-      model + 1
-
-    Decrement ->
-      model - 1
-
-
+    Increment i ->
+      model + i
 
 -- VIEW
 
@@ -58,7 +51,9 @@ update msg model =
 view : Model -> Html Msg
 view model =
   div []
-    [ button [ onClick Decrement ] [ text "-" ]
-    , div [] [ text (String.fromInt model) ]
-    , button [ onClick Increment ] [ text "+" ]
+    [ text "Hello World!"
+    , p [] [ button [onClick (Increment 1)] [ text (String.concat ["Click Me!(", String.fromInt model ,")"]) ]]
+    , button [ onClick (Increment 1)] [ text "1" ]
+    , button [ onClick (Increment 2)] [ text "2" ]
+    , button [ onClick (Increment 3)] [ text "3" ]
     ]
